@@ -7,6 +7,8 @@
 \usepackage[a4paper]{geometry}
 \usepackage{siunitx}
 \usepackage{circuitikz}\usepackage{pgfplots}
+\usepackage{float}
+\usepackage{subcaption}
 
 \usetikzlibrary{pgfplots.smithchart}
 
@@ -17,12 +19,147 @@
 \maketitle
 
 \section{Introduction}
-In this lab assignment, we used a Keysight <Insert actual model name here> VNA to measure several important properties for passive devices.
+
+In this lab assignment, we used a Keysight E5063A ENA Network Analyzer to do several transmission line measurements and measure several important properties for passive devices. Afterwards, we simulated the transmission line and devices in ADS to make further comparison and analysis.
 
 \section{Methods}
 
+\subsection{Calibration}
+
+To accomplish the lab, we stated with calibrating the network analyzer. The calibration process is critical to making accurate measurements because it can eliminate the errors and move the reference plane from the ports to the end tip of the cables. For this lab, we used the 85033E calibration kit, which later turned out to be defective and caused noisy and data in the measurements. The materials we used includes Duriod board (H=1.57048mm, L=14cm, $\epsilon_{r}=2.3 $), 5mm and 10mm Copper tape, and connectors and mounting blocks.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Short.jpg}
+    \caption{Build mechanics for transmission line measurement}
+\end{figure}
+
+\begin{flushleft}
+In order to get more accurate data, it is also necessary to move the reference from the connector reference plane to the board-edge reference plane(As Fig.1 shown above). To achieve this target, we built the board in a different way as the Figure 2 below illustrates.
+\end{flushleft}
+
+\begin{flushleft}
+As the figure demonstrates, we short the line at both end. Therefore, after we connect the cable to the connector , we can tune the electrical delay to adjust the smith chart for $S_{11}$ and $S_{22}$ so that the graphs looks like short circuit. The electrical delay is later put into Scale-Electrical delay in the Network Analyzer. 
+\end{flushleft}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width = 0.8\textwidth]{figures/connector.jpg}
+    \caption{Build mechanics for reference plane extension}
+\end{figure}
+
+
+
+
+\subsection{Transmission Line Measurement}
+
+
+\begin{flushleft}
+The transmission line measurement includes two parts: the measurement of real physics device and simulation in the ADS software. We fabricated the device as Figure 1 shown in the previous sector. The only difference is that we used two female connectors instead due to the calibration kit limitation. We measured 3mm 5mm and 10mm copper tape respectively, and peeled of the tape to change the tape after each measurements. 
+
+\end{flushleft}
+
+\begin{flushleft}
+To do the simulation, we first typed in the proprieties for the Duriod board into the LineCalc (Figure 4) to calculate theoretic characteristic impedance and shift, then imported the proprieties to the transmission line model in the ADS schematic as shown below. Finally, we adjusts the shift to make the simulation looks like the measurements. The results for the measurements and data will be analyzed in the result section below.
+\end{flushleft}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.8\linewidth]{figures/schematic.PNG}
+    \caption{Transmission Line Simulation Schematic}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.8\linewidth]{figures/linecalc.png}
+    \caption{Transmission Line Simulation Schematic}
+\end{figure}
+
+\subsection{Passive Devices Measurement}
+
+\begin{flushleft}
+
+Finally, we conducted several measurements for the Passive Devices. The 
+fabrication setup and and the simulation schematic are illustrated below. The passive devices include a 50 $\Omega$ 1/4-inch-long-leaded resistor a 50$\Omega$ very-short-leaded resistor, a 15 $\Omega$ chip resistor, a 100pF leaded capacitor, a 100pF chip capacitor, and a 30pH hand-made inductor.  The results for the measurements and simulation will also be analyzed and compared afterwards.
+\end{flushleft}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.8\textwidth]{figures/Passive.jpg}
+    \caption{Build mechanics for passive devices measurements}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.8\textwidth]{figures/schematic2.PNG}
+    \caption{Simulation schematic for one of the passive devices}
+    \label{fig:my_label}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
 \section{Results}
-\begin{figure}
+\subsection{Transmission Line Measurement}
+The results for 3mm, 5mm and 10mm transmission line measurements are plot as $S_{11}$ on the smith chart below.  
+
+The results for 3mm, 5mm and 10 mm transmission line simulation are plots as $S_{11}$ below
+\begin{figure}[h]
+
+\begin{subfigure}{0.3\textwidth}
+\includegraphics[width=1\linewidth,height = 5.5cm]{figures/tempplot/3mm_sim.jpg} 
+\caption{3mm TL Simulation}
+\label{fig:subim1}
+\end{subfigure}
+\begin{subfigure}{0.3\textwidth}
+\includegraphics[width=1\linewidth,height = 5.5cm]{figures/tempplot/5mm_sim.jpg}
+\caption{5mm Tl Simulation}
+\label{fig:subim2}
+\end{subfigure}
+\begin{subfigure}{0.3\textwidth}
+\includegraphics[width=1\linewidth, height = 5.5cm]{figures/tempplot/10mm_sim.png}
+\caption{10mm Tl Simulation}
+\label{fig:subim3}
+\end{subfigure}
+\end{figure}
+
+
+
+In order to calculate the Characteristic Impedance, we use the Formula:
+\[Z_{in} =  \frac{{Z_0}^2}{Z_L}\]
+Therefore:
+\begin{equation}
+    Z_0 = \sqrt{Z_{in}*Z_L} \quad \text{with} \quad Z_L = 50 \Omega
+\end{equation}
+
+
+
+
+
+
+In order to compute the phase velocity along the line, we refer back to the fundamental physical definition.
+\begin{equation}
+    v_{ph} = \frac{\omega}{k} = \frac{-l \omega}{\phi(\omega)}
+\end{equation}
+This statement 
+\begin{equation}
+    v_{gr}(\omega) = -l \left( \frac{d\phi}{d\omega} \right)^{-1}
+\end{equation}
+
+
+
+
+\begin{figure}[H]
   \includegraphics[width=0.8\textwidth]{figures/build/phase_vel.pdf}
   \caption{Effective phase velocity, measured for excitations at angular frequency $\omega$.}
 \end{figure}
