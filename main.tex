@@ -202,20 +202,72 @@ Therefore we derive the formula for the measured load resistance, capacitance, a
 \end{flushleft}
 
 \begin{equation}
- 
       \quad \text{For Resistor: }\quad 
-    Z_L = \frac{{Z_0}^2}{Z_{in}} \quad text{with Z_in is given as the impedance in the marker; Z_0 is calculated above} \quad 
+    Z_L = \frac{{Z_0}^2}{Z_{in}} \quad
+\end{equation}
+\begin{equation}
     \quad \text{For Capacitance: }\quad 
-    C = \frac{1}{j \omega X} \\
+    C = \frac{1}{j \omega X} \quad
+\end{equation}    
+\begin{equation}
     \quad \text{For Inductance: }\quad
-    L = \frac{X}{j \omega}
-
-   
+    L = \frac{X}{j \omega} \quad
 \end{equation}
 
+\begin{flushleft}
+From the formula above, the calculated values for our passive devices is listed in the table below
+\end{flushleft}
+
+\begin{center}
+\begin{tabular}{||c c c c c||} 
+ \hline
+ \quad & 50 \Omega Resistor & 15 \Omege Chip Resistor & 100pf Cap & 30nH Inductor  \\ [0.7ex] 
+ \hline
+ Measured & 52.27 \Omega & 14.95 \Omega & 120 pF & 26.53nH \\ [0.7ex] 
+ \hline
+ Real & 51 \Omega & 15 \Omega & 1oo pF & 30nH \\[0.7ex] 
+ \hline
 
 
 
+\end{tabular}
+\end{center}
+
+\begin{flushleft}
+From the data above, we can see that although the data might be a bit noisy, the values are reasonable and fairly close to the real number.And the following figure is a plot compare the 1/4 inch long resistor and short leaded resistor, we can find that the results meet the anticipation that the longer line brings larger inductance.
+\end{flushleft}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width = 0.8\textwidth]{figures/tempplot/compare_resistor.png}
+    \caption{Short vs Long resistor}
+    
+\end{figure}
+
+
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/build/smith_3mm.pdf}
+    \caption{Theory (red) and measurement (blue) of $S_{11}$ for the 3mm line. The cyan square is $Z_{in}$ measured at the crossing we used to estimate $Z_0$.}
+    \label{fig:smith_chart_3mm}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/build/smith_5mm.pdf}
+    \caption{Theory (red) and measurement (blue) of $S_{11}$ for the 5mm line.}
+    \label{fig:smith_chart_3mm}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/build/smith_10mm.pdf}
+    \caption{Theory (red) and measurement (blue) of $S_{11}$ for the 10mm line.}
+    \label{fig:smith_chart_3mm}
+\end{figure}
 
 
 
