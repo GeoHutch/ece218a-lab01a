@@ -115,8 +115,8 @@ The results for 3mm, 5mm and 10mm transmission line measurements are plot as $S_
 
 The results for 3mm, 5mm and 10 mm transmission line simulation are plots as $S_{11}$ below
 \begin{figure}[h]
-
-\begin{subfigure}{0.3\textwidth}
+\centering
+\begin{subfigure}{0.29\textwidth}
 \includegraphics[width=1\linewidth,height = 5.5cm]{figures/tempplot/3mm_sim.jpg} 
 \caption{3mm TL Simulation}
 \label{fig:subim1}
@@ -126,7 +126,7 @@ The results for 3mm, 5mm and 10 mm transmission line simulation are plots as $S_
 \caption{5mm Tl Simulation}
 \label{fig:subim2}
 \end{subfigure}
-\begin{subfigure}{0.3\textwidth}
+\begin{subfigure}{0.33\textwidth}
 \includegraphics[width=1\linewidth, height = 5.5cm]{figures/tempplot/10mm_sim.png}
 \caption{10mm Tl Simulation}
 \label{fig:subim3}
@@ -135,12 +135,35 @@ The results for 3mm, 5mm and 10 mm transmission line simulation are plots as $S_
 
 
 
-In order to calculate the Characteristic Impedance, we use the Formula:
+\begin{flushleft}
+In order to calculate the Characteristic Impedance, we use the formula below:
+\end{flushleft}
+
 \[Z_{in} =  \frac{{Z_0}^2}{Z_L}\]
 Therefore:
 \begin{equation}
     Z_0 = \sqrt{Z_{in}*Z_L} \quad \text{with} \quad Z_L = 50 \Omega
 \end{equation}
+
+\begin{flushleft}
+With this function, we can calculate all the characteristic impedance from our measurement. To compute conveniently, we chose a marker on the middle line in the smith chart, thus meaning the capacitance and inductance can be negligible. The values of the impedance are listed in the table below. From the results we can observe that although the data is quite noisy, we still get reasonable impedance measurements which has a fairly low error compared to the theoretical values we get from the LineCalc. 
+\end{flushleft}
+
+\begin{center}
+\begin{tabular}{||c c c c||} 
+ \hline
+ \quad & 3mm & 5mm & 10mm \\ [0.7ex] 
+ \hline\hline
+ LineCalc($\Omega$) & 64.41 & 46.47 & 27.86 \\ [0.7ex] 
+ \hline
+ Measurement($\Omega$) & 65.12 & 47.12 & 28.24 \\[0.7ex] 
+ \hline
+ Error(\%) & 1.10 & 1.39 & 1.38 \\[0.7ex] 
+ \hline
+
+\end{tabular}
+\end{center}
+
 
 
 
@@ -151,17 +174,52 @@ In order to compute the phase velocity along the line, we refer back to the fund
 \begin{equation}
     v_{ph} = \frac{\omega}{k} = \frac{-l \omega}{\phi(\omega)}
 \end{equation}
-This statement 
-\begin{equation}
-    v_{gr}(\omega) = -l \left( \frac{d\phi}{d\omega} \right)^{-1}
-\end{equation}
-
-
+This statement may be evaluated to find a reasonable amount of agreement among the line widths tested.
+Despite the noise in the measurements (especially at lower frequencies, due to effectively averaging over fewer samples,
+we note an overall agreement among the traces to around $2.3 \cdot 10^8 \si{\meter\per\second}$, which is a notable but not fundamentally unreasonable error above theory.
 
 
 \begin{figure}[H]
   \includegraphics[width=0.8\textwidth]{figures/build/phase_vel.pdf}
   \caption{Effective phase velocity, measured for excitations at angular frequency $\omega$.}
+  \label{fig:phasevel}
 \end{figure}
+
+\subsection{Passive Devices Measurement}
+
+\begin{flushleft}
+As mentioned above, we mentioned a 50 $\Omega$ 1/4-inch-long-leaded resistor a 50$\Omega$ very-short-leaded resistor, a 15 $\Omega$ chip resistor, a 100pF leaded capacitor, a 100pF chip capacitor, and a 30pH hand-made inductor. We will calculate the measured resistance for the resistor, the capacitance for the capacitor and inductance for the inductor. The formula is :
+\end{flushleft}
+
+\begin{equation}
+    Z_{in} = R + jX 
+    \quad \text{with Capacitor: } \quad X= \frac{1}{j\omega C}
+    \quad \text{with Inductor: } \quad X= j \omega L
+\end{equation}
+
+\begin{flushleft}
+Therefore we derive the formula for the measured load resistance, capacitance, and inductance as follows:
+\end{flushleft}
+
+\begin{equation}
+ 
+      \quad \text{For Resistor: }\quad 
+    Z_L = \frac{{Z_0}^2}{Z_{in}} \quad text{with Z_in is given as the impedance in the marker; Z_0 is calculated above} \quad 
+    \quad \text{For Capacitance: }\quad 
+    C = \frac{1}{j \omega X} \\
+    \quad \text{For Inductance: }\quad
+    L = \frac{X}{j \omega}
+
+   
+\end{equation}
+
+
+
+
+
+
+
 \end{document}
+
+
 
