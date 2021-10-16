@@ -15,7 +15,7 @@ end
 
 function read_one_port(fpath)
   open(fpath) do file
-    for _ in 1:9
+    for _ in 1:6
       readline(file)
     end
     freqs = read_next_unit(file, dtype=Float64)
